@@ -1,0 +1,64 @@
+name: Laravel Follow-up Test
+
+on:
+  push:
+    paths:
+      - 'Laravel-Follow-up-Skills-Test/**'
+      - '.github/workflows/laravel-tests.yml'
+  pull_request:
+    paths:
+      - 'Laravel-Follow-up-Skills-Test/**'
+      - '.github/workflows/laravel-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: laravel-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: PHP 8.3 / Laravel 13
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: Laravel-Follow-up-Skills-Test
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: ctype, fileinfo, mbstring, openssl, pdo_sqlite, sqlite3, tokenizer
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate Composer configuration
+        run: composer validate --strict --no-check-publish
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare Laravel environment
+        run: |
+          cp .env.example .env
+          touch database/database.sqlite
+          php artisan key:generate --ansi
+
+      - name: Run database migrations
+        run: php artisan migrate --force --no-interaction --ansi
+
+      - name: Run automated tests
+        run: composer test
+
+      - name: Check code style
+        run: vendor/bin/pint --test
+
+      - name: Audit Composer dependencies
+        run: composer audit --no-interaction

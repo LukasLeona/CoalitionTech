@@ -1,6 +1,6 @@
 # CoalitionTech Product Inventory
 
-[![Tests](https://github.com/LukasLeona/CoalitionTech/actions/workflows/tests.yml/badge.svg)](https://github.com/LukasLeona/CoalitionTech/actions/workflows/tests.yml)
+[![Laravel tests](https://github.com/LukasLeona/CoalitionTech/actions/workflows/laravel-tests.yml/badge.svg)](https://github.com/LukasLeona/CoalitionTech/actions/workflows/laravel-tests.yml)
 
 A focused Laravel skills-test submission for entering inventory products and reviewing their value in real time. The interface uses Bootstrap 5.3 and progressively enhanced JavaScript: create and edit requests run through AJAX, while Laravel remains the source of validation, persistence, totals, and response formatting.
 
@@ -28,7 +28,7 @@ From the extracted project or a fresh clone, run the included setup script:
 composer run setup
 ```
 
-It installs PHP dependencies, copies `.env.example` when `.env` is absent, creates `database/database.sqlite` when needed, generates the application key, and runs the migrations. No database server, connection edit, or frontend build step is required.
+It installs PHP dependencies, copies `.env.example` when `.env` is absent, creates `database/database.sqlite` when needed, generates the application key, runs the migrations, and loads deterministic sample inventory. No database server, connection edit, or frontend build step is required.
 
 Then start the development server:
 
@@ -48,7 +48,7 @@ php artisan migrate:fresh --seed
 
 ## How it works
 
-The page first renders a complete table on the server, then the browser submits create and edit forms with `fetch`. Every successful mutation returns the same canonical snapshot shape:
+The browser loads the canonical inventory snapshot from Laravel, then submits create and edit forms with `fetch`. Every successful mutation returns the same snapshot shape:
 
 ```json
 {
@@ -100,16 +100,16 @@ vendor/bin/pint --test
 composer audit --no-interaction
 ```
 
-The feature coverage exercises page rendering, newest-first listing, valid creation, validation failures, editing, calculated values, and aggregate metadata. Unit coverage verifies JSON synchronization and valid snapshot content. Tests use an isolated database and do not depend on the evaluator's local inventory data.
+The feature coverage exercises page rendering, newest-first listing, valid creation, validation failures, editing, calculated values, JSON synchronization, seeded data, and aggregate metadata. Tests use an isolated database and do not depend on the evaluator's local inventory data.
 
-The workflow in `.github/workflows/tests.yml` installs dependencies on PHP 8.3, prepares SQLite, runs all migrations and tests, checks Laravel Pint formatting, and audits Composer dependencies.
+The repository workflow in `../.github/workflows/laravel-tests.yml` installs dependencies on PHP 8.3, prepares SQLite, runs all migrations and tests, checks Laravel Pint formatting, and audits Composer dependencies.
 
 ## Submission timing evidence
 
 The public Git history is intentionally unsquashed so the assessment window is independently visible. Work began with:
 
-- [`ffb8db4939ebdfd136c7ac3e6791e7aa3e47a674` — “Laravel Follow-up Skills Test: Start skills test”](https://github.com/LukasLeona/CoalitionTech/commit/ffb8db4939ebdfd136c7ac3e6791e7aa3e47a674)
-- Commit timestamp: **October 20, 2026 at 4:55:35 PM (Asia/Manila, UTC+08:00)**
+- [`d5afc0fe3925f3b7ee5440d5b7a4c0adeed35032` — “Laravel Follow-up Skills Test: Start skills test”](https://github.com/LukasLeona/CoalitionTech/commit/d5afc0fe3925f3b7ee5440d5b7a4c0adeed35032)
+- Commit timestamp: **October 20, 2026 at 9:49:02 PM (Asia/Manila, UTC+08:00)**
 
 GitHub's public commit and Actions timestamps provide the external record of the implementation window.
 

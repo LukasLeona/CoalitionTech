@@ -4,7 +4,7 @@ This public repository keeps the five Coalition Technologies follow-up assessmen
 
 | Test | Folder | Status |
 | --- | --- | --- |
-| Laravel Follow-up Skills Test | [`Laravel-Follow-up-Skills-Test`](Laravel-Follow-up-Skills-Test/) | In progress |
+| Laravel Follow-up Skills Test | [`Laravel-Follow-up-Skills-Test`](Laravel-Follow-up-Skills-Test/) | Complete |
 | Magento 2 Follow-up Skills Test | [`Magento-2-Follow-up-Skills-Test`](Magento-2-Follow-up-Skills-Test/) | Awaiting brief |
 | Shopify Follow-up Skills Test | [`Shopify-Follow-up-Skills-Test`](Shopify-Follow-up-Skills-Test/) | Awaiting brief |
 | BigCommerce Follow-up Skills Test | [`BigCommerce-Follow-up-Skills-Test`](BigCommerce-Follow-up-Skills-Test/) | Awaiting brief |
